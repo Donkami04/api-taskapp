@@ -8,7 +8,7 @@ const sequelize = new Sequelize(
   dbConfig.username,
   dbConfig.password,
   {
-    host: "localhost",
+    host: dbConfig.host,
     dialect: dbConfig.dialect,
   }
 );

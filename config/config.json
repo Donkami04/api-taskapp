@@ -1,7 +1,7 @@
 {
   "development": {
     "dialect": "mysql",
-    "host": "localhost",
+    "host": "db",
     "username": "root",
     "password": "root",
     "database": "tasksapp"
