@@ -3,7 +3,7 @@ const sequelize = require("../db/conection");
 
 class User extends Model {
   static associate(models) {
-    User.hasMany(models.Task);
+    User.hasMany(models.Task, { foreignKey: 'userId' });
   }
 }
 

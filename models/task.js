@@ -17,8 +17,6 @@ Task.init(
       references: {
         model: "Users",
         key: "id",
-        onDelete: "CASCADE",
-        onUpdate: "CASCADE",
       },
     },
   },
