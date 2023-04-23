@@ -1,7 +1,7 @@
 const { User } = require("../models/user");
 
 async function getUsers() {
-  const users = await User.findAll({attributes: { exclude: ['updatedAt', 'createdAt'] }});
+  const users = await User.findAll();
   return users;
 }
 
@@ -11,10 +11,11 @@ async function getOneUser(id) {
   return { message: "The user does not exists" };
 }
 
-async function createUser(data) {
+async function createUser(data, photo) {
   const newUser = await User.create({
     name: data.name,
     age: data.age,
+    imgUrl: photo,
   });
   return newUser;
 }
@@ -38,8 +39,6 @@ async function deleteUser(id) {
     };
     await User.destroy({ where: { id: id } });
     return { message: `User whit id ${id} deleted successfully` };
-  
-  // ! Usuairo no encontrado
 }
 
 module.exports = { getUsers, getOneUser, editOneUser, deleteUser, createUser };

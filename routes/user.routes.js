@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const { getUsers, getOneUser, editOneUser, createUser, deleteUser } = require("../controllers/user.controller");
+// const multer  = require('multer')
+// const upload = multer({ dest: 'uploads/' })
+const {upload} = require('../libs/storage')
 
-
-router.get("/users", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const users = await getUsers();
     res.json(users);
@@ -13,7 +15,7 @@ router.get("/users", async (req, res) => {
   }
 });
 
-router.get("/users/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const user = await getOneUser(req.params.id);
     res.json(user);
@@ -23,11 +25,11 @@ router.get("/users/:id", async (req, res) => {
   }
 });
 
-router.post("/create-user", async (req, res) => {
+router.post("/new", upload.single('foto'), async (req, res) => {
   try {
-    console.log(req.body);
     const data = req.body;
-    const newUser = await createUser(data);
+    const photo = req.file.path;
+    const newUser = await createUser(data, photo);
     res.json(newUser);
   } catch (error) {
     console.error(error);
@@ -35,7 +37,7 @@ router.post("/create-user", async (req, res) => {
   }
 });
 
-router.put("/users/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     const cambios = req.body;
     const id = req.params.id;
@@ -47,7 +49,7 @@ router.put("/users/:id", async (req, res) => {
   }
 });
 
-router.delete("/users/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const user = await deleteUser(req.params.id);
     res.json(user);
@@ -56,5 +58,6 @@ router.delete("/users/:id", async (req, res) => {
     res.status(500).json({ message: "There was an error removing the user." });
   }
 });
+
 
 module.exports = router;

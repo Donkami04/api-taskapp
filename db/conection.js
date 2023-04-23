@@ -1,17 +1,17 @@
-const { Sequelize } = require("sequelize");
-const config = require("../config/config");
-const env = "development";
-const dbConfig = config[env];
+  const { Sequelize } = require("sequelize");
+  const config = require("../config/config");
+  const env = "development";
+  const dbConfig = config[env];
 
-const sequelize = new Sequelize(
-  dbConfig.database,
-  dbConfig.username,
-  dbConfig.password,
-  {
-    host: dbConfig.host,
-    dialect: dbConfig.dialect,
-  }
-);
+  const sequelize = new Sequelize(
+    dbConfig.database,
+    dbConfig.username,
+    dbConfig.password,
+    {
+      host: dbConfig.host,
+      dialect: dbConfig.dialect,
+    }
+  );
 
 // Función para verificar la conexión a la base de datos
 async function checkDatabaseConnection() {

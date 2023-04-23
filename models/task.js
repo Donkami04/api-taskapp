@@ -23,6 +23,7 @@ Task.init(
   {
     sequelize,
     modelName: "Task",
+    timestamps: false
   }
 );
 

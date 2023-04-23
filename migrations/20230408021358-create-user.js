@@ -15,15 +15,38 @@ module.exports = {
       age: {
         type: Sequelize.INTEGER
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+      imgUrl: {
+        type: Sequelize.STRING
       }
     });
+    await queryInterface.createTable('LoginUsers', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      email: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true
+      },
+      password: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      userId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Users',
+          key: 'id',
+        },
+        onDelete: 'cascade',
+        onUpdate: 'cascade',
+      }
+    });
+
     await queryInterface.createTable('Tasks', {
       id: {
         allowNull: false,
@@ -46,19 +69,13 @@ module.exports = {
         },
         onDelete: 'cascade',
         onUpdate: 'cascade',
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
       }
     });
+
   },
   async down(queryInterface) {
     await queryInterface.dropTable('Users');
     await queryInterface.dropTable('Tasks');
+    await queryInterface.dropTable('LoginUsers');
   }
 };

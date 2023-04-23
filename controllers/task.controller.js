@@ -1,7 +1,7 @@
 const { Task } = require("../models/task");
 
 async function getTasks() {
-  const tasks = await Task.findAll({attributes: { exclude: ['updatedAt', 'createdAt'] }});
+  const tasks = await Task.findAll();
   return tasks;
 }
 

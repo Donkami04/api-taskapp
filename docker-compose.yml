@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 services:
   db:
@@ -6,8 +6,8 @@ services:
     container_name: mysql_container
     restart: always
     environment:
-      MYSQL_DATABASE: tasksapp
       MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: tasksapp
       MYSQL_USER: camilo
       MYSQL_PASSWORD: root
     volumes:
@@ -16,10 +16,11 @@ services:
       - 3306:3306
 
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin:latest
+    image: phpmyadmin/phpmyadmin
     restart: always
     environment:
-      PMA_HOST: mysql
+      PMA_HOST: db
+      PMA_PORT: 3306
       MYSQL_ROOT_PASSWORD: root
     ports:
       - 8080:80
