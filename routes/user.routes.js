@@ -25,24 +25,25 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/new", upload.single('foto'), async (req, res) => {
+router.post("/register", upload.single("foto"), async (req, res) => {
   try {
     const data = req.body;
     const photo = req.file.path;
     const newUser = await createUser(data, photo);
-    res.json(newUser);
+    res.status(200).json({message: `Welcome ${newUser.name}! Please Login`});
+
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "There was an error creating the user." });
+    res.status(500).json({ message: "There was an error registering the user." });
   }
-});
+})
 
-router.put("/:id", async (req, res) => {
+router.put("/edit/:id", async (req, res) => {
   try {
     const cambios = req.body;
     const id = req.params.id;
     const user = await editOneUser(id, cambios);
-    res.json(user);
+    res.json({message: 'The user was updated', user});
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "There was an error creating the user." });

@@ -15,17 +15,6 @@ module.exports = {
       age: {
         type: Sequelize.INTEGER
       },
-      imgUrl: {
-        type: Sequelize.STRING
-      }
-    });
-    await queryInterface.createTable('LoginUsers', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
       email: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -35,15 +24,8 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      userId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'Users',
-          key: 'id',
-        },
-        onDelete: 'cascade',
-        onUpdate: 'cascade',
+      imgUrl: {
+        type: Sequelize.STRING
       }
     });
 
@@ -76,6 +58,5 @@ module.exports = {
   async down(queryInterface) {
     await queryInterface.dropTable('Users');
     await queryInterface.dropTable('Tasks');
-    await queryInterface.dropTable('LoginUsers');
   }
 };

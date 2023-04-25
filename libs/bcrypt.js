@@ -6,7 +6,7 @@ async function comparePassword(password, hash) {
     return result;
   } catch (error) {
     console.log(error);
-    return false;
+    return {message: "Something went wrong"};
   }
 }
 
