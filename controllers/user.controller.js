@@ -1,13 +1,13 @@
 const { User } = require("../models/user");
 
 async function getUsers() {
-  const users = await User.findAll({attributes: { exclude: ['password', 'imgUrl'] }});
+  const users = await User.findAll({attributes: { exclude: ['password'] }});
   return users;
 }
 
 async function getOneUser(id) {
   const user = await User.findByPk(id, {
-    attributes: { exclude: ['password', 'imgUrl'] }
+    attributes: { exclude: ['password'] }
   });
   if (user !== null) return user;
   return { message: "The user does not exists" };

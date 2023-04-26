@@ -36,10 +36,10 @@ async function editOneTask(id, cambios) {
 async function deleteTask(id) {
   const task = await Task.findByPk(id);
   if (task === null) {
-    return { message: `The task with id ${id} does not exists` };
+    return { status: 400, message: `The task with id ${id} does not exists` };
   }
   await Task.destroy({ where: { id: id } });
-  return { message: `Task whit id ${id} deleted successfully` };
+  return {status: 200, message: `Task whit id ${id} deleted successfully` };
 }
 
 module.exports = { getTasks, getOneTask, editOneTask, deleteTask, createTask };
